@@ -39,12 +39,12 @@ plt.title("Rack Inlet Temperature Frequency")
 plt.legend()
 deg = u'\N{DEGREE SIGN}'
 #print deg
-print frequency0[0]
+#print frequency0[0]
 
 plt.xlabel("Temperature ("+deg + "C)")
 plt.ylabel("Frequency")
 
-print range(0,3)
+#print range(0,3)
 for i in range (0,4):
     b[i,0] = mean(my_data[:,i]);
     b[i,1] = var(my_data[:,i]);
@@ -56,7 +56,8 @@ b[1,4] = entropy(frequency1[0]);
 b[2,4] = entropy(frequency2[0]);
 b[3,4] = entropy(frequency3[0]);
 
-print(b)
+for i in range (0,5):
+    print(b[:,i])
 
 #plt.show()
 

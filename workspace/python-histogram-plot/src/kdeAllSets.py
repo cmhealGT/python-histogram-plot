@@ -25,7 +25,7 @@ for x in range(0,4):
     plt.plot(x_values, firstPDF,label=csv_labels[x])
     #print(firstPDF)
 
-plt.title("Rack Inlet Temperature Frequency")
+plt.title("Rack Inlet Temperature Frequency (KDE-bw="+str(bandwidth)+")")
 plt.legend()
 deg = u'\N{DEGREE SIGN}'
 plt.xlabel("Temperature ("+deg + "C)")
