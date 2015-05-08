@@ -7,29 +7,29 @@ from scipy.stats.distributions import entropy
 
 #add some sort of function definition?
 # name of csv
+csvString = 'ComparableMetrics.csv'
 # number of models
-# number of metrics
-
-f = open('ComparableMetrics.csv')
-csv_f = csv.reader(f)
-
 numModels = 11;
+# number of metrics
 numMetrics = 4;
-a = array([2,3,4])
+# number of bins
+numBins = 8;
+
 b = zeros((numModels,numMetrics));
 
-my_data = genfromtxt('ComparableMetrics.csv',delimiter=',')
-
-numBins = 8
-minValue = min(my_data[:,0])
+my_data = genfromtxt(csvString,delimiter=',')
 
 #TODO adjust the min/max search a little bit
+minValue = min(my_data[:,0])
 maxValue = max(my_data[:,numModels-1])
 print mean(my_data[:,3])
 for x in range (0,numModels):
     maxInterim = max(my_data[:,x])
     if maxInterim > maxValue:
         maxValue = maxInterim
+    minInterim = min(my_data[:,x])
+    if minInterim < minValue:
+        minValue = minInterim
 
 binWidth = (maxValue-minValue)/(numBins)
 newBins=np.arange(minValue,maxValue,binWidth)
@@ -54,4 +54,3 @@ for i in range (0,5):
     print(b[:,i])
 
 plt.show()
-
