@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 import csv
 from scipy.stats.distributions import entropy
 
+#add some sort of function definition?
+# name of csv
+# number of models
+# number of metrics
+
 f = open('ComparableMetrics.csv')
 csv_f = csv.reader(f)
 
@@ -13,16 +18,12 @@ numMetrics = 4;
 a = array([2,3,4])
 b = zeros((numModels,numMetrics));
 
-#for row in csv_f:
-#    print (row)
-    
 my_data = genfromtxt('ComparableMetrics.csv',delimiter=',')
-#print (my_data)
 
-#Matplotlib has a built-in tex-like 
 numBins = 8
 minValue = min(my_data[:,0])
 
+#TODO adjust the min/max search a little bit
 maxValue = max(my_data[:,numModels-1])
 print mean(my_data[:,3])
 for x in range (0,numModels):
@@ -33,6 +34,7 @@ for x in range (0,numModels):
 binWidth = (maxValue-minValue)/(numBins)
 newBins=np.arange(minValue,maxValue,binWidth)
 
+#TODO process array only once for speedup?
 for x in range (0,numModels):
     frequency = plt.hist(my_data[:,x], bins=newBins, histtype='step',normed=True,label=labels[x]);
     b[x,0] = mean(my_data[:,x]);
@@ -44,16 +46,12 @@ for x in range (0,numModels):
 plt.title("Rack Inlet Temperature Frequency")
 plt.legend()
 deg = u'\N{DEGREE SIGN}'
-#print deg
-#print frequency0[0]
 
 plt.xlabel("Temperature ("+deg + "C)")
 plt.ylabel("Frequency")
 
-#print range(0,3);
-
 for i in range (0,5):
     print(b[:,i])
 
-#plt.show()
+plt.show()
 
