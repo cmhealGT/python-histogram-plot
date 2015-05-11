@@ -7,13 +7,15 @@ from scipy.stats.distributions import entropy
 
 #add some sort of function definition?
 # name of csv
-csvString = 'ComparableMetrics.csv'
+csvString = 'FFDTileAirflows.csv'
 # number of models
-numModels = 11;
+numModels = 10;
 # number of metrics
-numMetrics = 4;
+numMetrics = 5;
 # number of bins
 numBins = 8;
+# labels
+labels = array(["0.6096","0.5","0.4","0.3048","0.2","0.1524","0.1","0.0762","0.05","0.0381"])
 
 b = zeros((numModels,numMetrics));
 
@@ -22,7 +24,7 @@ my_data = genfromtxt(csvString,delimiter=',')
 #TODO adjust the min/max search a little bit
 minValue = min(my_data[:,0])
 maxValue = max(my_data[:,numModels-1])
-print mean(my_data[:,3])
+#print mean(my_data[:,3])
 for x in range (0,numModels):
     maxInterim = max(my_data[:,x])
     if maxInterim > maxValue:
@@ -43,7 +45,7 @@ for x in range (0,numModels):
     b[x,3] = kurtosis(my_data[:,x]);
     b[x,4] = entropy(frequency[0])
 
-plt.title("Rack Inlet Temperature Frequency")
+plt.title(csvString+" Frequency")
 plt.legend()
 deg = u'\N{DEGREE SIGN}'
 

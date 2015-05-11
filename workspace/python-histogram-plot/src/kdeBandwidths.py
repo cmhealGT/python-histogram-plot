@@ -9,25 +9,23 @@ import matplotlib.pyplot as plt
 import numpy as np
 from stat import ST_DEV
 
-
-f = open('ComparableMetrics.csv')
-csv_f = csv.reader(f)
-csv_labels = array(["Quick","Detailed 24","Detailed 12","Detailed 6"])
+csvString = 'FFDTileAirflows.csv'
+csv_labels = array(["0.6096","0.5","0.4","0.3048"])
 
 #only one set of data
-my_data = genfromtxt('ComparableMetrics.csv',delimiter=',')
-bandwidths = array([0.2, 0.5, 1.0, 1.5, 2.0, 5.0])
+my_data = genfromtxt(csvString,delimiter=',')
+bandwidths = array([0.2, 0.5, 1.0, 1.5, 2.0, 3.0, 4.0, 5.0])
 series = 1
 for x in range(0, len(bandwidths)):
     stdev = sqrt(var(my_data[:,series]));
-    x_values = range(20, int(math.ceil(max(my_data[:,series])+5)))
+    x_values = range(125, int(math.ceil(max(my_data[:,series])+50)))
     bandwidth = bandwidths[x]
     firstKDE = gaussian_kde(my_data[:,series], bw_method=bandwidth/stdev);
     firstPDF = firstKDE.evaluate(x_values);
     plt.plot(x_values, firstPDF,label=csv_labels[series]+" bw="+str(bandwidths[x]))
     #print(firstPDF)
 
-plt.title("Rack Inlet Temperature Frequency")
+plt.title(csvString + " Frequency")
 plt.legend()
 deg = u'\N{DEGREE SIGN}'
 plt.xlabel("Temperature ("+deg + "C)")
