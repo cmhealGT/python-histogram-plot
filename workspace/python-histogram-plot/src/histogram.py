@@ -7,15 +7,16 @@ from scipy.stats.distributions import entropy
 
 #add some sort of function definition?
 # name of csv
-csvString = 'FFDTileAirflows.csv'
+csvString = 'CFDTileAirflowsSources.csv'
 # number of models
-numModels = 10;
+numModels = 5;
 # number of metrics
 numMetrics = 5;
 # number of bins
 numBins = 8;
 # labels
-labels = array(["0.6096","0.5","0.4","0.3048","0.2","0.1524","0.1","0.0762","0.05","0.0381"])
+labels = array(["0.6096","0.3048","0.1524",'0.0762',"0.0381"])
+#labels = array(["0.6096","0.3048","0.1524",'0.0762',"0.0381"])
 
 b = zeros((numModels,numMetrics));
 
@@ -32,6 +33,7 @@ for x in range (0,numModels):
     minInterim = min(my_data[:,x])
     if minInterim < minValue:
         minValue = minInterim
+        
 
 binWidth = (maxValue-minValue)/(numBins)
 newBins=np.arange(minValue,maxValue,binWidth)
@@ -49,7 +51,7 @@ plt.title(csvString+" Frequency")
 plt.legend()
 deg = u'\N{DEGREE SIGN}'
 
-plt.xlabel("Temperature ("+deg + "C)")
+plt.xlabel("Airflow Rate (cfm)")
 plt.ylabel("Frequency")
 
 for i in range (0,5):
