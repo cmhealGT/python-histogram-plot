@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from stat import ST_DEV
 
-csvString = 'CFDTileAirflowsSources.csv'
+csvString = 'PFMTileAirflows.csv'
 # number of models
 numModels = 5;
 csv_labels = array(["0.6096","0.3048","0.1524",'0.0762',"0.0381"])
@@ -35,7 +35,7 @@ rangeVal = maxVal - minVal
 for x in range(0,numModels):
     stdev = sqrt(var(my_data[:,x]));
     x_values = range(int(minVal - 0.05*rangeVal), int(maxVal+0.05*rangeVal))
-    bandwidth = 5
+    bandwidth = 1
     firstKDE = gaussian_kde(my_data[:,x], bw_method=bandwidth/stdev);
     firstPDF = firstKDE.evaluate(x_values);
     plt.plot(x_values, firstPDF,label=csv_labels[x])
@@ -44,7 +44,7 @@ for x in range(0,numModels):
 
 plt.title(csvString + " Frequency (KDE-bw="+str(bandwidth)+")")
 plt.legend()
-plt.axis([minVal-50,maxVal+50, 0,0.025])
+plt.axis([minVal- 0.05*rangeVal,maxVal+0.05*rangeVal, 0,0.25])
 deg = u'\N{DEGREE SIGN}'
 plt.xlabel("Airflow Rate (cfm)")
 #plt.xlabel("Temperature ("+deg + "C)")

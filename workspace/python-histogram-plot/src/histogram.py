@@ -7,7 +7,7 @@ from scipy.stats.distributions import entropy
 
 #add some sort of function definition?
 # name of csv
-csvString = 'CFDTileAirflowsSources.csv'
+csvString = 'PFMTileAirflows.csv'
 # number of models
 numModels = 5;
 # number of metrics
